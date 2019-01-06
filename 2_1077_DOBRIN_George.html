@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!--PWA metadata-->
+    <link rel="apple-touch-icon" sizes="57x57" href="media/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="media/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="media/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="media/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="media/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="media/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="media/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="media/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="media/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="media/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="media/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="media/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="media/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="media/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+
+    <title>Video Player</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Boostrap css-->
+    <link rel="stylesheet" href="lib/css/bootstrap.min.css">
+    <!--My css-->
+    <link rel="stylesheet" type="text/css" media="screen" href="2_1077_DOBRIN_George.css" />
+
+    <script>
+        if ('serviceWorker' in navigator) { 
+            window.addEventListener('load', function() {   
+                navigator.serviceWorker.register('/sw.js').then(
+                function(registration) { 
+                    // Registration was successful
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope); }, 
+                function(err) { 
+                    // registration failed :( 
+                    console.log('ServiceWorker registration failed: ', err); 
+                }); 
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="container" id="player">
+        <!--Video player-->
+        <video width="600" height="400" controls autoplay id="video-player">
+            <source src="media/video0.mp4" type="video/mp4" id="mp4-source">
+            <track kind="subtitles" label="English subtitles" src="en.vtt" srclang="en" default></track>
+        </video>
+    </div>
+
+    <div class="container" id="controls">
+        <!--Video controls via canvas-->
+        <canvas id="prev-btn" width="20" height="20"> </canvas>
+        <canvas id="play-btn" width="20" height="20"> </canvas>
+        <canvas id="pause-btn" width="20" height="20"> </canvas>
+        <canvas id="next-btn" width="20" height="20"> </canvas>
+    </div>
+
+    <div class="container" id="list">
+        <ul class="list-group">
+            <li class="list-group-item active" id="basketball-player" onclick="playVideo(0)">Basketball Player</li>
+            <li class="list-group-item" id="balloon-car" onclick="playVideo(1)">Balloon Car</li>
+            <li class="list-group-item" id="chasing-car" onclick="playVideo(2)">Chasing Car</li>
+        </ul>
+    </div>
+
+    <div class="container" id="effects">
+        <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-4">
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Select video effect
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="#" id="normal-effect">Normal</a>
+                        <a class="dropdown-item" href="#" id="grayscale-effect">Grayscale</a>
+                        <a class="dropdown-item" href="#" id="invert-effect">Invert colors</a>
+                    </div>
+                </div>
+            </div>        
+            <div class="col-sm-4">
+                <button type="button" class="btn btn-light col-sm-6" id="screenshot-btn">Capture Screenshot</button>
+            </div>
+            <div class="col-sm-2"></div>
+        </div>
+    </div>
+
+    <div class="container" id="local-storage-cards">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Last screenshot on:</h5>
+                    <p class="card-text" id="screenshot-text"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                    <h5 class="card-title">Last video played on:</h5>
+                    <p class="card-text" id="video-played-text"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" id="effect-canvas" style="text-align: center;">
+        <canvas id="canvas-effect" width="600" height="400"></canvas>
+    </div>
+
+    <div class="container" id="screenshot-canvas">
+        <canvas id="canvas-screenshot" width="600" height="400"></canvas>
+    </div>
+
+
+
+    <!--Bootstrap js-->
+    <script src="lib/js/jquery-3.3.1.slim.min.js"></script>
+    <script src="lib/js/popper-1.14.6.js"></script>
+    <script src="lib/js/bootstrap.min.js"></script>
+    <!--My js-->
+    <script src="2_1077_DOBRIN_George.js"></script>
+    <!--Service Worker js-->
+    
+</body>
+</html>

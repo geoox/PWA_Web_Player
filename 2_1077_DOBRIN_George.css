@@ -1,0 +1,54 @@
+body{
+    margin:0;
+    
+}
+
+#player{
+    text-align: center;
+    margin:auto !important;
+    margin-bottom: 10px;
+}
+
+#list{
+    width: 650px;
+    margin-top: 10px;
+}
+
+#controls{
+    width:600px;
+    text-align: center;
+}
+
+#controls canvas, #effects button{
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
+#effects{
+    text-align: center;
+    margin-top: 10px;
+}
+
+#screenshot-canvas{
+    text-align: center;
+    margin-top: 10px;
+}
+
+#local-storage-cards{
+    text-align: center;
+    margin-top: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+    #local-storage-cards  .row{
+        width: 650px;
+    }
+
+    #effects .row{
+        width: 620px;
+    }
+}
+
+#effect-canvas{
+    margin-top: 10px;
+}
