@@ -2,7 +2,7 @@
     "name": "PWA Video Player",
     "short_name": "Video Player",
     "lang": "en",
-    "start_url": "/index.html",
+    "start_url": "./index.html",
     "display": "standalone",
     "theme_color": "#007bff",
     "icons": [
